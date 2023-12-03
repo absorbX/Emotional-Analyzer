@@ -1,2 +1,2 @@
-# Detecting_Expression
-A program to recognize facial expressions
+# Emotional-Analyzer
+A program to recognize facial expressions and analyze emotions

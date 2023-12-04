@@ -4,15 +4,27 @@ import numpy as np
 
 # Map emotion labels to corresponding indices
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+emotion_model = './Emotion_little_vgg.h5'
 
 # Load the facial emotion analysis model
-model = load_model('Emotion_little_vgg.h5')
+model = load_model(emotion_model)
 
-# Open the webcam
-cap = cv2.VideoCapture(0)
+# Take user input for selecting webcam or video file
+user_input = input("Enter 1 for webcam or 2 for video file: ")
+
+if user_input == '1':
+    # Open the webcam
+    cap = cv2.VideoCapture(0)
+elif user_input == '2':
+    # Read video file
+    video_file_path = input("Enter the path to the video file: ")
+    cap = cv2.VideoCapture(video_file_path)
+else:
+    print("Invalid input. Please enter 1 for webcam or 2 for video file.")
+    exit()
 
 while True:
-    # Read a frame from the webcam
+    # Read a frame from the webcam or video file
     ret, frame = cap.read()
 
     # Resize the frame
@@ -50,6 +62,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Release the webcam and close the window
+# Release the webcam or video file and close the window
 cap.release()
 cv2.destroyAllWindows()
